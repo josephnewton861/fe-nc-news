@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
+import ArticleList from "./components/ArticleList";
+import { Router } from "@reach/router";
 
 class App extends Component {
   state = {
@@ -13,6 +15,9 @@ class App extends Component {
       <div>
         <Header username={username} />
         <NavBar />
+        <Router>
+          <ArticleList path="/" />
+        </Router>
       </div>
     );
   }
