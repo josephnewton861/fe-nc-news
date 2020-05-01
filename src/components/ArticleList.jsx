@@ -23,8 +23,19 @@ class ArticleList extends Component {
     );
   }
   componentDidMount = () => {
+    this.fetchArticles();
+  };
+  componentDidUpdate = (previousProps, previousState) => {
+    if (previousProps.topic_slug !== this.props.topic_slug) {
+      return this.fetchArticles();
+    }
+  };
+
+  fetchArticles = () => {
     axios
-      .get("https://joseph-nc-news.herokuapp.com/api/articles")
+      .get("https://joseph-nc-news.herokuapp.com/api/articles", {
+        params: { topic: this.props.topic_slug },
+      })
       .then((response) => {
         const { articles } = response.data;
         this.setState({ articles: articles });
