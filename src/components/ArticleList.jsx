@@ -1,19 +1,26 @@
 import { Link } from "@reach/router";
 import React, { Component } from "react";
 import axios from "axios";
+import LoadingIndicator from "./LoadingIndicator";
 
 class ArticleList extends Component {
   state = {
     articles: [],
+    isLoading: true,
   };
   render() {
     const { articles } = this.state;
+    const { isLoading } = this.state;
+    if (isLoading) return <LoadingIndicator />;
     return (
       <main className="articles">
         {articles.map((article) => {
           return (
             <h3>
-              <Link to="/articles" key={article.article_id}>
+              <Link
+                to={`/article/${article.article_id}`}
+                key={article.article_id}
+              >
                 {article.title}
               </Link>
             </h3>
@@ -38,7 +45,7 @@ class ArticleList extends Component {
       })
       .then((response) => {
         const { articles } = response.data;
-        this.setState({ articles: articles });
+        this.setState({ articles: articles, isLoading: false });
       });
   };
 }

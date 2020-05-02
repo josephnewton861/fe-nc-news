@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import ArticleList from "./components/ArticleList";
 import { Router } from "@reach/router";
+import SingleArticle from "./components/SingleArticle";
+import ArticleComments from "./components/ArticleComments";
 
 class App extends Component {
   state = {
@@ -18,6 +20,8 @@ class App extends Component {
         <Router>
           <ArticleList path="/" />
           <ArticleList path="/articles/:topic_slug" />
+          <SingleArticle path="article/:article_id" />
+          <ArticleComments path="article/:article_id/comments" />
         </Router>
       </div>
     );
