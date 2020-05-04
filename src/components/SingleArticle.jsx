@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
+import AddCommentByArticleId from "../components/AddCommentByArticleId";
 // import * as utils from "../utils/utils";
 // import LoadingIndicator from "../components/LoadingIndicator";
 
@@ -32,11 +33,17 @@ class SingleArticle extends Component {
         <p>Current comments: {comment_count}</p>
         <p> Date of publication: {created_at}</p>
         <p>Article Id: {article_id}</p>
-        <button>
+        <button className="commentViewer">
           <Link to={`/article/${article_id}/comments`}>
             Read article comments
           </Link>
         </button>
+        <section>
+          <AddCommentByArticleId
+            // addComment={this.addComment}
+            article_id={article_id}
+          />
+        </section>
       </section>
     );
   }
@@ -51,6 +58,14 @@ class SingleArticle extends Component {
         // const formattedArticle = utils.formatDate(data.article);
         this.setState({ article: data.article, isLoading: false });
       });
+  };
+  addComment = (newComment) => {
+    console.log(newComment);
+    this.setState((currentState) => {
+      return {
+        article: [newComment, ...currentState.article],
+      };
+    });
   };
 }
 

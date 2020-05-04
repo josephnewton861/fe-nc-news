@@ -42,6 +42,8 @@ class ArticleList extends Component {
     axios
       .get("https://joseph-nc-news.herokuapp.com/api/articles", {
         params: { topic: this.props.topic_slug },
+        sort_by: "votes",
+        order: "desc",
       })
       .then((response) => {
         const { articles } = response.data;
