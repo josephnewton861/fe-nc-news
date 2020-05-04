@@ -3,7 +3,7 @@ import React from "react";
 const LoadingIndicator = () => {
   return (
     <section>
-      <p>Loading...</p>
+      <p className="loading">Loading...</p>
     </section>
   );
 };

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CommentVoter from "./CommentVoter";
+// import { Link } from "@reach/router";
 
 class ArticleComments extends Component {
   state = {
@@ -13,14 +15,16 @@ class ArticleComments extends Component {
         {comments.map(
           ({ comment_id, article_id, author, votes, created_at, body }) => {
             return (
-              <section className="article">
-                <h3 key={comment_id}>Author: {author}</h3>
+              <section className="article" key={comment_id}>
+                <h3>Author: {author}</h3>
                 <h4>Body: {body}</h4>
-                <h4>Current votes: {votes}</h4>
+                <CommentVoter id={comment_id} votes={votes} />
                 <p> Date of publication: {created_at}</p>
                 <p>Article Id: {article_id}</p>
                 <p>Comment Id: {comment_id}</p>
-                <button>Delete comment</button>
+                <button onClick={() => this.handlesDelete(comment_id)}>
+                  Delete comment
+                </button>
               </section>
             );
           }
@@ -40,6 +44,28 @@ class ArticleComments extends Component {
       .then(({ data }) => {
         // console.log(data.comments);
         return this.setState({ comments: data.comments });
+      });
+  };
+  handlesDelete = (comment_id) => {
+    console.log("Deleted");
+
+    return axios
+      .delete(`https://joseph-nc-news.herokuapp.com/api/comments/${comment_id}`)
+      .then((res) => {
+        this.setState((previousState) => {
+          //   console.log(previousState);
+          return {
+            comments: previousState.comments.filter((comment) => {
+              //   console.log(comment);
+              //   console.log(comment_id);
+              if (comment.comment_id !== comment_id) return true;
+              else return false;
+            }),
+          };
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 }

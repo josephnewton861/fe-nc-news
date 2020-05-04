@@ -16,7 +16,7 @@ class NavBar extends Component {
           </h3>
           {topics.map((topic) => {
             return (
-              <h3>
+              <h3 key={topic.slug}>
                 <Link to={`/articles/${topic.slug}`}>{topic.slug}</Link>
               </h3>
             );
