@@ -32,13 +32,11 @@ class AddCommentByArticleId extends Component {
       )
       .then(({ data }) => {
         this.props.addComment(data.comment);
-      })
-      .then(
         this.setState({
           author: "",
           body: "",
-        })
-      )
+        });
+      })
       .catch((err) => {
         console.dir(err);
       });

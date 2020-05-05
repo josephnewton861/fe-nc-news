@@ -29,3 +29,11 @@
 .loading {
   text-align: center;
 }
+
+.errMsg {
+  text-align: center;
+  font-size: 1.5em;
+}
+button:disabled {
+  opacity: 0.5;
+}

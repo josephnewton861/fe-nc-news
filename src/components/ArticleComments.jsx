@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import axios from "axios";
 import CommentVoter from "./CommentVoter";
+import LoadingIndicator from "./LoadingIndicator";
+import ErrorDisplayer from "../components/ErrorDisplayer";
 // import { Link } from "@reach/router";
 
 class ArticleComments extends Component {
   state = {
     comments: [],
+    isLoading: true,
+    err: "",
   };
   render() {
+    const { err } = this.state;
     const { comments } = this.state;
+    const { isLoading } = this.state;
     // console.log(comments);
+    if (isLoading) return <LoadingIndicator />;
+    if (err) return <ErrorDisplayer err={err} />;
     return (
       <section>
         {comments.map(
@@ -43,7 +51,10 @@ class ArticleComments extends Component {
       )
       .then(({ data }) => {
         // console.log(data.comments);
-        return this.setState({ comments: data.comments });
+        return this.setState({ comments: data.comments, isLoading: false });
+      })
+      .catch((err) => {
+        console.dir(err);
       });
   };
   handlesDelete = (comment_id) => {
@@ -65,7 +76,7 @@ class ArticleComments extends Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
 }

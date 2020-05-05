@@ -6,14 +6,25 @@ class CommentVoter extends Component {
     voteDifference: 0,
   };
   render() {
-    const { id, votes } = this.props;
-    console.log(id);
-    console.log(votes);
+    const { voteDifference } = this.state;
+    // const { id, votes } = this.props;
+    // console.log(id);
+    // console.log(votes);
     return (
       <div>
-        <button onClick={() => this.handlesVotes(1)}>Increase votes</button>
+        <button
+          onClick={() => this.handlesVotes(1)}
+          disabled={voteDifference === 1}
+        >
+          Increase votes
+        </button>
         <h4>Current votes: {this.props.votes + this.state.voteDifference}</h4>
-        <button onClick={() => this.handlesVotes(-1)}>Decrease votes</button>
+        <button
+          onClick={() => this.handlesVotes(-1)}
+          disabled={voteDifference === -1}
+        >
+          Decrease votes
+        </button>
       </div>
     );
   }
@@ -29,7 +40,7 @@ class CommentVoter extends Component {
           inc_votes: voteChange,
         }
       )
-      .then(() => {
+      .catch(() => {
         this.setState((currentState) => {
           return { voteDifference: currentState.voteDifference - voteChange };
         });

@@ -6,6 +6,7 @@ import ArticleList from "./components/ArticleList";
 import { Router } from "@reach/router";
 import SingleArticle from "./components/SingleArticle";
 import ArticleComments from "./components/ArticleComments";
+import ErrorDisplayer from "./components/ErrorDisplayer";
 
 class App extends Component {
   state = {
@@ -22,6 +23,7 @@ class App extends Component {
           <ArticleList path="/articles/:topic_slug" />
           <SingleArticle path="article/:article_id" />
           <ArticleComments path="article/:article_id/comments" />
+          <ErrorDisplayer default />
         </Router>
       </div>
     );

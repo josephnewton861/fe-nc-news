@@ -4,15 +4,21 @@ import { Link } from "@reach/router";
 import AddCommentByArticleId from "../components/AddCommentByArticleId";
 import ArticleVoter from "../components/ArticleVoter";
 // import * as utils from "../utils/utils";
-// import LoadingIndicator from "../components/LoadingIndicator";
+import LoadingIndicator from "../components/LoadingIndicator";
+import ErrorDisplayer from "../components/ErrorDisplayer";
 
 class SingleArticle extends Component {
   state = {
     article: {},
-    // isLoading: true,
+    isLoading: true,
+    err: "",
   };
   render() {
+    const { err } = this.state;
+    const { isLoading } = this.state;
     // console.log(isLoading);
+    if (isLoading) return <LoadingIndicator />;
+    if (err) return <ErrorDisplayer err={err} />;
     const {
       title,
       author,
@@ -23,7 +29,6 @@ class SingleArticle extends Component {
       created_at,
       article_id,
     } = this.state.article;
-    // if (isLoading) return <LoadingIndicator />;
     return (
       <section className="article">
         <h3>Article title: {title}</h3>
@@ -58,6 +63,10 @@ class SingleArticle extends Component {
       .then(({ data }) => {
         // const formattedArticle = utils.formatDate(data.article);
         this.setState({ article: data.article, isLoading: false });
+      })
+      .catch((err) => {
+        console.dir(err.response.data.msg);
+        this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
   addComment = (newComment) => {
