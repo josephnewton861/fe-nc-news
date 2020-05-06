@@ -19,25 +19,33 @@ class ArticleComments extends Component {
     if (isLoading) return <LoadingIndicator />;
     if (err) return <ErrorDisplayer err={err} />;
     return (
-      <section>
-        {comments.map(
-          ({ comment_id, article_id, author, votes, created_at, body }) => {
-            return (
-              <section className="article" key={comment_id}>
-                <h3>Author: {author}</h3>
-                <h4>Body: {body}</h4>
-                <CommentVoter id={comment_id} votes={votes} />
-                <p> Date of publication: {created_at}</p>
-                <p>Article Id: {article_id}</p>
-                <p>Comment Id: {comment_id}</p>
-                <button onClick={() => this.handlesDelete(comment_id)}>
-                  Delete comment
-                </button>
-              </section>
-            );
-          }
-        )}
-      </section>
+      <div className="container">
+        <div className="card">
+          <section>
+            {comments.map(
+              ({ comment_id, article_id, author, votes, created_at, body }) => {
+                return (
+                  <section className="article" key={comment_id}>
+                    <h3>Author: {author}</h3>
+                    <h4>Body: {body}</h4>
+                    <CommentVoter id={comment_id} votes={votes} />
+                    <p> Date of publication: {created_at}</p>
+                    <p>Article Id: {article_id}</p>
+                    <p>Comment Id: {comment_id}</p>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => this.handlesDelete(comment_id)}
+                    >
+                      Delete comment
+                    </button>
+                    <hr className="break"></hr>
+                  </section>
+                );
+              }
+            )}
+          </section>
+        </div>
+      </div>
     );
   }
   componentDidMount = () => {

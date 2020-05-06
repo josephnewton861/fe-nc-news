@@ -13,13 +13,15 @@ class ArticleVoter extends Component {
     return (
       <div>
         <button
+          className="btn btn-primary size-xs"
           onClick={() => this.handlesVotes(1)}
           disabled={voteChange === 1}
         >
           Increase vote
         </button>
-        <p>Current votes {this.props.votes + this.state.voteChange}</p>
+        <h4>Current votes {this.props.votes + this.state.voteChange}</h4>
         <button
+          className="btn btn-primary"
           onClick={() => this.handlesVotes(-1)}
           disabled={voteChange === -1}
         >

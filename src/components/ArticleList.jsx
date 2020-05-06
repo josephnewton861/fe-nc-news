@@ -18,16 +18,17 @@ class ArticleList extends Component {
     if (isLoading) return <LoadingIndicator />;
     if (err) return <ErrorDisplayer err={err} />;
     return (
-      <main className="articles">
+      <main className="articlesContainer">
         {articles.map((article) => {
           return (
-            <h3 key={article.article_id}>
+            <h3 className="articlesList" key={article.article_id}>
               <Link
                 to={`/article/${article.article_id}`}
                 key={article.article_id}
               >
                 {article.title}
               </Link>
+              <hr></hr>
             </h3>
           );
         })}

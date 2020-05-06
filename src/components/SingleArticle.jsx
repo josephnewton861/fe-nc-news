@@ -30,27 +30,35 @@ class SingleArticle extends Component {
       article_id,
     } = this.state.article;
     return (
-      <section className="article">
-        <h3>Article title: {title}</h3>
-        <h4>Author: {author}</h4>
-        <h4>Choosen topic: {topic}</h4>
-        <p> Body: {body}</p>
-        <ArticleVoter votes={votes} id={article_id} />
-        <p>Current comments: {comment_count}</p>
-        <p> Date of publication: {created_at}</p>
-        <p>Article Id: {article_id}</p>
-        <button className="commentViewer">
-          <Link to={`/article/${article_id}/comments`}>
-            Read article comments
-          </Link>
-        </button>
-        <section>
-          <AddCommentByArticleId
-            // addComment={this.addComment}
-            article_id={article_id}
-          />
-        </section>
-      </section>
+      <div className="container">
+        <div className="jumbotron">
+          <div className="col-lg-12 col-lg-8">
+            <div className="card-block">
+              <section className="singleArticle">
+                <h3 className="card-title">Article title: {title}</h3>
+                <h4>Author: {author}</h4>
+                <h4>Choosen topic: {topic}</h4>
+                <p> Body: {body}</p>
+                <ArticleVoter votes={votes} id={article_id} />
+                <p>Current comments: {comment_count}</p>
+                <p> Date of publication: {created_at}</p>
+                <p>Article Id: {article_id}</p>
+                <button className="variant=outline-primary">
+                  <Link to={`/article/${article_id}/comments`}>
+                    Read article comments
+                  </Link>
+                </button>
+                <section>
+                  <AddCommentByArticleId
+                    // addComment={this.addComment}
+                    article_id={article_id}
+                  />
+                </section>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
   componentDidMount = () => {

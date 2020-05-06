@@ -7,6 +7,7 @@ import { Router } from "@reach/router";
 import SingleArticle from "./components/SingleArticle";
 import ArticleComments from "./components/ArticleComments";
 import ErrorDisplayer from "./components/ErrorDisplayer";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   state = {

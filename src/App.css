@@ -1,29 +1,63 @@
 .h1 {
   text-align: left;
+  padding-left: 30px;
+  size: 10em;
+}
+
+.header {
+  grid-area: header;
+  background-color: rgba(13, 110, 139, 0.6);
+  color: white;
+  height: 10vh;
+  position: relative;
   padding-left: 20px;
 }
 
 .login {
   text-align: right;
   padding-right: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 .nav {
+  grid-area: sidebar;
   padding-left: 20px;
+  padding-top: 110px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-.articles {
-  text-align: center;
+.container {
+  max-width: 1500px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0.3rem;
 }
 
-.article {
+.articlesList {
+  grid-area: mainContent;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.singleArticle {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .commentViewer {
   margin-top: 10px;
   margin-bottom: 30px;
+  text-decoration: none;
+  transition: opacity 0.5s ease-in;
 }
 
 .loading {
@@ -36,4 +70,19 @@
 }
 button:disabled {
   opacity: 0.5;
+}
+
+.commentViewer:hover {
+  opacity: 0.7;
+}
+
+.article {
+  text-align: center;
+  /* background-color: rgba(13, 110, 139, 0.6);
+  color: whitesmoke; */
+}
+
+.break {
+  color: gray;
+  height: 1px;
 }

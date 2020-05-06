@@ -22,16 +22,18 @@ class AddCommentByArticleId extends Component {
     const { article_id } = this.props;
     // console.log(article_id);
 
+    console.log(author);
     axios
       .post(
         `https://joseph-nc-news.herokuapp.com/api/articles/${article_id}/comments`,
         {
-          author: author,
+          username: author,
           body: body,
         }
       )
       .then(({ data }) => {
-        this.props.addComment(data.comment);
+        // console.log(this.props.addComment);
+        // this.props.addComment(data.comment);
         this.setState({
           author: "",
           body: "",
@@ -47,32 +49,30 @@ class AddCommentByArticleId extends Component {
     const { author, body } = this.state;
     return (
       <form onSubmit={this.handlesCommentSubmission}>
-        <label>
+        <label className="author">
           Author:
           <input
             name="author"
             onChange={this.handlesChange}
             type="text"
             value={author}
+            required
           />
         </label>
-        <label>
+        <label className="AddedComment">
           Add new comment:
           <input
             name="body"
             onChange={this.handlesChange}
             type="text"
             value={body}
+            required="Comment cannot be left blank"
           />
         </label>
-        <button>Submit new comment</button>
+        <button className="btn btn-info">Submit new comment</button>
       </form>
     );
   }
 }
-
-//state for author and for an added comment both as empty strings
-// we need a this.handlesChange function that handles the change of the input
-// on submit function which handlesSubmit of the form
 
 export default AddCommentByArticleId;

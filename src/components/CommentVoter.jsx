@@ -13,6 +13,7 @@ class CommentVoter extends Component {
     return (
       <div>
         <button
+          className="btn btn-info"
           onClick={() => this.handlesVotes(1)}
           disabled={voteDifference === 1}
         >
@@ -20,6 +21,7 @@ class CommentVoter extends Component {
         </button>
         <h4>Current votes: {this.props.votes + this.state.voteDifference}</h4>
         <button
+          className="btn btn-info"
           onClick={() => this.handlesVotes(-1)}
           disabled={voteDifference === -1}
         >

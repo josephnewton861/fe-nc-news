@@ -10,13 +10,16 @@ class NavBar extends Component {
     const { topics } = this.state;
     return (
       <div>
-        <nav className="nav">
-          <h3>
+        <nav className="">
+          <h3 className="">
             <Link to="/">Home</Link>
           </h3>
           {topics.map((topic) => {
             return (
-              <h3 key={topic.slug}>
+              <h3
+                className="mobile-header-nav mobile-menu-toggle js-toggle-menu hamburger-menu"
+                key={topic.slug}
+              >
                 <Link to={`/articles/${topic.slug}`}>{topic.slug}</Link>
               </h3>
             );
