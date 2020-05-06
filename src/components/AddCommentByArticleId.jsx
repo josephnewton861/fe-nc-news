@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+// import { Link } from "@reach/router";
 
 class AddCommentByArticleId extends Component {
   state = {
@@ -20,6 +21,7 @@ class AddCommentByArticleId extends Component {
     console.log("submitted", this.state);
     const { body, author } = this.state;
     const { article_id } = this.props;
+
     // console.log(article_id);
 
     console.log(author);

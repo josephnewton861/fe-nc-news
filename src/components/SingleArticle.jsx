@@ -35,7 +35,9 @@ class SingleArticle extends Component {
           <div className="col-lg-12 col-lg-8">
             <div className="card-block">
               <section className="singleArticle">
-                <h3 className="card-title">Article title: {title}</h3>
+                <h3 className="card-title">
+                  <u>Article title: {title}</u>
+                </h3>
                 <h4>Author: {author}</h4>
                 <h4>Choosen topic: {topic}</h4>
                 <p> Body: {body}</p>
@@ -43,7 +45,7 @@ class SingleArticle extends Component {
                 <p>Current comments: {comment_count}</p>
                 <p> Date of publication: {created_at}</p>
                 <p>Article Id: {article_id}</p>
-                <button className="variant=outline-primary">
+                <button className="readComments">
                   <Link to={`/article/${article_id}/comments`}>
                     Read article comments
                   </Link>

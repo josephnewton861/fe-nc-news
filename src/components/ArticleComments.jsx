@@ -68,24 +68,33 @@ class ArticleComments extends Component {
   handlesDelete = (comment_id) => {
     console.log("Deleted");
 
-    return axios
-      .delete(`https://joseph-nc-news.herokuapp.com/api/comments/${comment_id}`)
-      .then((res) => {
-        this.setState((previousState) => {
-          //   console.log(previousState);
-          return {
-            comments: previousState.comments.filter((comment) => {
-              //   console.log(comment);
-              //   console.log(comment_id);
-              if (comment.comment_id !== comment_id) return true;
-              else return false;
-            }),
-          };
+    let userPrompt = prompt(
+      "Are you sure you want to delete this comment? Type yes if you do"
+    );
+    if (userPrompt === "yes")
+      return axios
+        .delete(
+          `https://joseph-nc-news.herokuapp.com/api/comments/${comment_id}`
+        )
+        .then((res) => {
+          this.setState((previousState) => {
+            //   console.log(previousState);
+            return {
+              comments: previousState.comments.filter((comment) => {
+                //   console.log(comment);
+                //   console.log(comment_id);
+                if (comment.comment_id !== comment_id) return true;
+                else return false;
+              }),
+            };
+          });
+        })
+        .catch((err) => {
+          this.setState({ isLoading: false, err: err.response.data.msg });
         });
-      })
-      .catch((err) => {
-        this.setState({ isLoading: false, err: err.response.data.msg });
-      });
+    else {
+      return alert("Deleted comment aborted!");
+    }
   };
 }
 
