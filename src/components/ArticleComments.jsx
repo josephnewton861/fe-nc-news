@@ -8,7 +8,7 @@ import ErrorDisplayer from "../components/ErrorDisplayer";
 class ArticleComments extends Component {
   state = {
     comments: [],
-    isLoading: true,
+    // isLoading: true,
     err: "",
   };
   render() {
@@ -59,7 +59,7 @@ class ArticleComments extends Component {
       )
       .then(({ data }) => {
         // console.log(data.comments);
-        return this.setState({ comments: data.comments, isLoading: false });
+        return this.setState({ comments: data.comments });
       })
       .catch((err) => {
         console.dir(err);

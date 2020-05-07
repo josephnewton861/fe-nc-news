@@ -6,14 +6,15 @@ import ArticleVoter from "../components/ArticleVoter";
 // import * as utils from "../utils/utils";
 import LoadingIndicator from "../components/LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
+import ArticleComments from "../components/ArticleComments";
 
 class SingleArticle extends Component {
   state = {
     article: {},
     isLoading: true,
     err: "",
-    author: "",
-    body: "",
+    // author: "",
+    // body: "",
   };
   render() {
     const { err } = this.state;
@@ -58,6 +59,7 @@ class SingleArticle extends Component {
                     article_id={article_id}
                   />
                 </section>
+                <ArticleComments />
               </section>
             </div>
           </div>
@@ -65,6 +67,7 @@ class SingleArticle extends Component {
       </div>
     );
   }
+  //render the article comments
   componentDidMount = () => {
     this.fetchSingleArticle();
   };

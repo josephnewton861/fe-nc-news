@@ -10,7 +10,7 @@ class NavBar extends Component {
     const { topics } = this.state;
     return (
       <div>
-        <nav className="">
+        <nav className="nav">
           <h3>
             <Link to="/">Home</Link>
           </h3>

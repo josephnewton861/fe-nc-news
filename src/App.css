@@ -1,3 +1,9 @@
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-areas: "header header" "nav main";
+}
+
 .h1 {
   text-align: left;
   padding-left: 30px;
@@ -14,19 +20,30 @@
 }
 
 .login {
+  size: 1em;
   text-align: right;
   padding-right: 20px;
   padding-bottom: 30px;
 }
 
 .nav {
-  grid-area: sidebar;
+  grid-area: nav;
+  display: flex;
   margin-left: 20px;
-  padding-top: 110px;
-  position: fixed;
+
+  position: relative;
   top: 0;
   left: 0;
   flex-direction: column;
+  color: aqua;
+}
+
+@media only screen and (max-width: 1100px) {
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 }
 
 .container {
@@ -34,6 +51,10 @@
   margin-top: 20px;
   overflow: hidden;
   padding: 0.3rem;
+}
+
+.articlesTitle {
+  text-align: center;
 }
 
 .articlesList {
@@ -44,6 +65,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.articlesTitle {
+  margin-top: 90px;
 }
 
 .singleArticle {
@@ -63,7 +88,6 @@
 
 .loading {
   text-align: center;
-  height: 100px;
 }
 
 .errMsg {
@@ -103,4 +127,8 @@ button:disabled {
 }
 .submit {
   margin-left: 15px;
+}
+
+.articlesContainer {
+  max-width: 950px;
 }

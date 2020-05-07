@@ -1,9 +1,11 @@
-import { Link } from "@reach/router";
 import React, { Component } from "react";
 import LoadingIndicator from "./LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
 // import * as api from "../utils/api";
 import axios from "axios";
+import ArticleCard from "../components/ArticleCard";
+
+// import axios from "axios";
 
 class ArticleList extends Component {
   state = {
@@ -20,17 +22,12 @@ class ArticleList extends Component {
     if (err) return <ErrorDisplayer err={err} />;
     return (
       <main className="articlesContainer">
+        <h2 className="articlesTitle">
+          Here are all the articles on our site click to view article in more
+          depth:
+        </h2>
         {articles.map((article) => {
-          return (
-            <h3 className="articlesList" key={article.article_id}>
-              <Link
-                to={`/article/${article.article_id}`}
-                key={article.article_id}
-              >
-                {article.title}
-              </Link>
-            </h3>
-          );
+          return <ArticleCard {...article} />;
         })}
         <hr></hr>
       </main>
