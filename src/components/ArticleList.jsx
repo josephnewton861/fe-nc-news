@@ -1,14 +1,15 @@
 import { Link } from "@reach/router";
 import React, { Component } from "react";
-import axios from "axios";
 import LoadingIndicator from "./LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
+// import * as api from "../utils/api";
+import axios from "axios";
 
 class ArticleList extends Component {
   state = {
     articles: [],
     isLoading: true,
-    sort_by: "created_at",
+    sort_by: "votes",
     err: "",
   };
   render() {
@@ -36,22 +37,21 @@ class ArticleList extends Component {
     );
   }
   componentDidMount = () => {
-    const params = {
-      topic: this.props.topic_slug,
-      sort_by: this.state.sort_by,
-    };
-    this.fetchArticles(params);
+    this.fetchArticles();
   };
   componentDidUpdate = (previousProps, previousState) => {
     if (
       previousProps.topic_slug !== this.props.topic_slug ||
       previousState.sort_by !== this.state.sort_by
     ) {
-      return this.fetchArticles();
+      this.fetchArticles();
     }
   };
 
   fetchArticles = () => {
+    // api.getArticles(this.props.topic_slug).then((articles) => {
+    //   this.setState({ articles, isLoading: false });
+    // });
     axios
       .get("https://joseph-nc-news.herokuapp.com/api/articles", {
         params: { topic: this.props.topic_slug, sort_by: this.state.sort_by },

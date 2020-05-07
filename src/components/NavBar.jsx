@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
-import axios from "axios";
+import * as api from "../utils/api";
 
 class NavBar extends Component {
   state = {
@@ -26,17 +26,9 @@ class NavBar extends Component {
     );
   }
   componentDidMount = () => {
-    this.fetchTopics();
-  };
-
-  //   componentDidUpdate = () => {};
-
-  fetchTopics = () => {
-    axios
-      .get("https://joseph-nc-news.herokuapp.com/api/topics")
-      .then(({ data }) => {
-        this.setState({ topics: data.topics });
-      });
+    api.fetchTopics().then((topics) => {
+      this.setState({ topics });
+    });
   };
 }
 
