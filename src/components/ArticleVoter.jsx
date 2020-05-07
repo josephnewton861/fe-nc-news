@@ -19,7 +19,7 @@ class ArticleVoter extends Component {
         >
           Increase vote
         </button>
-        <h4>Current votes {this.props.votes + this.state.voteChange}</h4>
+        <h4>Current votes: {this.props.votes + this.state.voteChange}</h4>
         <button
           className="btn btn-primary"
           onClick={() => this.handlesVotes(-1)}

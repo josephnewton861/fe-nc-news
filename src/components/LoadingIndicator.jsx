@@ -1,9 +1,11 @@
 import React from "react";
+import Spinner from "react-bootstrap/Spinner";
 
 const LoadingIndicator = () => {
   return (
-    <section>
-      <p className="loading">Loading...</p>
+    <section className="loading">
+      <Spinner animation="border" variant="success" />
+      <p>Loading...</p>
     </section>
   );
 };

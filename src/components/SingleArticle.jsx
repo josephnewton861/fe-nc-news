@@ -12,6 +12,8 @@ class SingleArticle extends Component {
     article: {},
     isLoading: true,
     err: "",
+    author: "",
+    body: "",
   };
   render() {
     const { err } = this.state;

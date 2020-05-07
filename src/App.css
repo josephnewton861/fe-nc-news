@@ -21,16 +21,17 @@
 
 .nav {
   grid-area: sidebar;
-  padding-left: 20px;
+  margin-left: 20px;
   padding-top: 110px;
   position: fixed;
   top: 0;
   left: 0;
+  flex-direction: column;
 }
 
 .container {
   max-width: 1500px;
-  margin: auto;
+  margin-top: 20px;
   overflow: hidden;
   padding: 0.3rem;
 }
@@ -62,6 +63,7 @@
 
 .loading {
   text-align: center;
+  height: 100px;
 }
 
 .errMsg {
@@ -78,8 +80,6 @@ button:disabled {
 
 .article {
   text-align: center;
-  /* background-color: rgba(13, 110, 139, 0.6);
-  color: whitesmoke; */
 }
 
 .break {
@@ -95,4 +95,12 @@ button:disabled {
 
 .readComments:hover {
   opacity: 0.7;
+}
+
+.articlesList {
+  margin-top: 50px;
+  padding: auto;
+}
+.submit {
+  margin-left: 15px;
 }

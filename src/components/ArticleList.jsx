@@ -8,7 +8,7 @@ class ArticleList extends Component {
   state = {
     articles: [],
     isLoading: true,
-    sort: "votes",
+    sort_by: "created_at",
     err: "",
   };
   render() {
@@ -28,18 +28,25 @@ class ArticleList extends Component {
               >
                 {article.title}
               </Link>
-              <hr></hr>
             </h3>
           );
         })}
+        <hr></hr>
       </main>
     );
   }
   componentDidMount = () => {
-    this.fetchArticles();
+    const params = {
+      topic: this.props.topic_slug,
+      sort_by: this.state.sort_by,
+    };
+    this.fetchArticles(params);
   };
   componentDidUpdate = (previousProps, previousState) => {
-    if (previousProps.topic_slug !== this.props.topic_slug) {
+    if (
+      previousProps.topic_slug !== this.props.topic_slug ||
+      previousState.sort_by !== this.state.sort_by
+    ) {
       return this.fetchArticles();
     }
   };
@@ -47,9 +54,7 @@ class ArticleList extends Component {
   fetchArticles = () => {
     axios
       .get("https://joseph-nc-news.herokuapp.com/api/articles", {
-        params: { topic: this.props.topic_slug },
-        sort: this.state.sort,
-        order: "desc",
+        params: { topic: this.props.topic_slug, sort_by: this.state.sort_by },
       })
       .then((response) => {
         const { articles } = response.data;
