@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import CommentVoter from "./CommentVoter";
+import Voter from "./Voter";
 import LoadingIndicator from "./LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
 import AddCommentByArticleId from "./AddCommentByArticleId";
@@ -35,11 +35,7 @@ class ArticleComments extends Component {
                   <section className="article" key={comment_id}>
                     <h3>Author: {author}</h3>
                     <h4>Body: {body}</h4>
-                    <CommentVoter
-                      id={comment_id}
-                      votes={votes}
-                      type="comments"
-                    />
+                    <Voter id={comment_id} votes={votes} type="comments" />
                     <p> Date of publication: {created_at}</p>
                     <p>Article Id: {article_id}</p>
                     <p>Comment Id: {comment_id}</p>

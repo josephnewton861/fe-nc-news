@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 // import { Link } from "@reach/router";
 // import AddCommentByArticleId from "../components/AddCommentByArticleId";
-import ArticleVoter from "../components/ArticleVoter";
+import Voter from "../components/Voter";
 // import * as utils from "../utils/utils";
 import LoadingIndicator from "../components/LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
@@ -47,7 +47,7 @@ class SingleArticle extends Component {
                 <h4>Author: {author}</h4>
                 <h4>Choosen topic: {topic}</h4>
                 <p> Body: {body}</p>
-                <ArticleVoter votes={votes} id={article_id} type="articles" />
+                <Voter votes={votes} id={article_id} type="articles" />
                 <p>Current comments: {comment_count}</p>
                 <p> Date of publication: {created_at}</p>
                 <p>Article Id: {article_id}</p>
