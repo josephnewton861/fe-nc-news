@@ -27,9 +27,8 @@ class ArticleList extends Component {
           depth:
         </h2>
         {articles.map((article) => {
-          return <ArticleCard {...article} />;
+          return <ArticleCard {...article} key={article.article_id} />;
         })}
-        <hr></hr>
       </main>
     );
   }

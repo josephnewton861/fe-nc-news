@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "@reach/router";
-import AddCommentByArticleId from "../components/AddCommentByArticleId";
+// import { Link } from "@reach/router";
+// import AddCommentByArticleId from "../components/AddCommentByArticleId";
 import ArticleVoter from "../components/ArticleVoter";
 // import * as utils from "../utils/utils";
 import LoadingIndicator from "../components/LoadingIndicator";
@@ -13,6 +13,8 @@ class SingleArticle extends Component {
     article: {},
     isLoading: true,
     err: "",
+    showComments: false,
+    changeNameOfButton: false,
     // author: "",
     // body: "",
   };
@@ -22,6 +24,7 @@ class SingleArticle extends Component {
     // console.log(isLoading);
     if (isLoading) return <LoadingIndicator />;
     if (err) return <ErrorDisplayer err={err} />;
+
     const {
       title,
       author,
@@ -44,35 +47,48 @@ class SingleArticle extends Component {
                 <h4>Author: {author}</h4>
                 <h4>Choosen topic: {topic}</h4>
                 <p> Body: {body}</p>
-                <ArticleVoter votes={votes} id={article_id} />
+                <ArticleVoter votes={votes} id={article_id} type="articles" />
                 <p>Current comments: {comment_count}</p>
                 <p> Date of publication: {created_at}</p>
                 <p>Article Id: {article_id}</p>
-                <button className="readComments">
-                  <Link to={`/article/${article_id}/comments`}>
-                    Read article comments
-                  </Link>
-                </button>
-                <section>
-                  <AddCommentByArticleId
-                    // addComment={this.addComment}
-                    article_id={article_id}
-                  />
-                </section>
-                <ArticleComments />
+                {this.state.changeNameOfButton === false ? (
+                  <div>
+                    <button
+                      onClick={this.handlesReadComments}
+                      className="readComments"
+                    >
+                      Read article comments
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={this.handlesReadComments}
+                    className="readComments"
+                  >
+                    Hide article comments
+                  </button>
+                )}
+                <section></section>
               </section>
             </div>
           </div>
         </div>
+        {this.state.showComments ? (
+          <div>
+            <ArticleComments article_id={article_id} />
+          </div>
+        ) : null}
       </div>
     );
   }
+  // if the show
   //render the article comments
   componentDidMount = () => {
     this.fetchSingleArticle();
   };
   fetchSingleArticle = () => {
     const { article_id } = this.props;
+
     axios
       .get(`https://joseph-nc-news.herokuapp.com/api/articles/${article_id}`)
       .then(({ data }) => {
@@ -84,16 +100,23 @@ class SingleArticle extends Component {
         this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
-  addComment = (newComment) => {
-    console.log(newComment);
-    this.setState((currentState) => {
-      return {
-        article: [newComment, ...currentState.article],
-      };
-    });
-  };
-  handlesVotes = () => {
+  // addComment = (newComment) => {
+  //   console.log(newComment);
+  //   this.setState((currentState) => {
+  //     return {
+  //       article: [newComment, ...currentState.article],
+  //     };
+  //   });
+  // };
+  // handlesVotes = () => {
+  //   console.log("clicked");
+  // };
+
+  handlesReadComments = () => {
     console.log("clicked");
+    const doesShow = this.state.showComments;
+    const changeName = this.state.changeNameOfButton;
+    this.setState({ showComments: !doesShow, changeNameOfButton: !changeName });
   };
 }
 

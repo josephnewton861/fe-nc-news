@@ -12,7 +12,7 @@ const ArticleCard = ({
 }) => {
   return (
     <div>
-      <Card className="text-center" key={article_id}>
+      <Card className="text-center">
         <Card.Header>Article</Card.Header>
         <Card.Body>
           <Card.Title>

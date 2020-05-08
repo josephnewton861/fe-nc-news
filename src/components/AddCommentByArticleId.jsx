@@ -35,8 +35,8 @@ class AddCommentByArticleId extends Component {
           }
         )
         .then(({ data }) => {
-          // console.log(this.props.addComment);
-          // this.props.addComment(data.comment);
+          console.log(this.props);
+          this.props.addComment(data.comment);
           this.setState({
             author: "",
             body: "",
