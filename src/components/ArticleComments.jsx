@@ -9,19 +9,21 @@ import AddCommentByArticleId from "./AddCommentByArticleId";
 class ArticleComments extends Component {
   state = {
     comments: [],
-    // isLoading: true,
+    isLoading: true,
     err: "",
   };
   render() {
     const { err } = this.state;
     const { comments } = this.state;
     const { isLoading } = this.state;
+    const { username } = this.props;
     // console.log(comments);
     if (isLoading) return <LoadingIndicator />;
     if (err) return <ErrorDisplayer err={err} />;
     return (
       <div className="container">
         <AddCommentByArticleId
+          username={username}
           article_id={this.props.article_id}
           addComment={this.addComment}
         />
@@ -76,7 +78,7 @@ class ArticleComments extends Component {
       )
       .then(({ data }) => {
         // console.log(data.comments);
-        return this.setState({ comments: data.comments });
+        return this.setState({ comments: data.comments, isLoading: false });
       })
       .catch((err) => {
         console.dir(err);

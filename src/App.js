@@ -22,7 +22,10 @@ class App extends Component {
         <Router>
           <ArticleList path="/" />
           <ArticleList path="/articles/:topic_slug" />
-          <SingleArticle path="article/:article_id" />
+          <SingleArticle
+            username={this.state.username}
+            path="article/:article_id"
+          />
           <ArticleComments path="article/:article_id/comments" />
           <ErrorDisplayer default />
         </Router>

@@ -4,7 +4,6 @@ import axios from "axios";
 
 class AddCommentByArticleId extends Component {
   state = {
-    author: "",
     body: "",
   };
   handlesChange = (event) => {
@@ -18,51 +17,34 @@ class AddCommentByArticleId extends Component {
 
   handlesCommentSubmission = (event) => {
     event.preventDefault();
+    const { username } = this.props;
     console.log("submitted", this.state);
-    const { body, author } = this.state;
+    const { body } = this.state;
     const { article_id } = this.props;
-    if (author !== "tickle122")
-      return alert(
-        "Cannot submit a comment with a different username than logged in with. Remember you are logged in as tickle122"
-      );
-    else {
-      axios
-        .post(
-          `https://joseph-nc-news.herokuapp.com/api/articles/${article_id}/comments`,
-          {
-            username: author,
-            body: body,
-          }
-        )
-        .then(({ data }) => {
-          console.log(this.props);
-          this.props.addComment(data.comment);
-          this.setState({
-            author: "",
-            body: "",
-          });
-        })
-        .catch((err) => {
-          console.dir(err);
+    axios
+      .post(
+        `https://joseph-nc-news.herokuapp.com/api/articles/${article_id}/comments`,
+        {
+          username: username,
+          body: body,
+        }
+      )
+      .then(({ data }) => {
+        console.log(this.props);
+        this.props.addComment(data.comment);
+        this.setState({
+          body: "",
         });
-    }
+      })
+      .catch((err) => {
+        console.dir(err);
+      });
   };
 
   render() {
-    // console.log(this.state.author);
-    const { author, body } = this.state;
+    const { body } = this.state;
     return (
       <form onSubmit={this.handlesCommentSubmission}>
-        <label className="author">
-          Author:
-          <input
-            name="author"
-            onChange={this.handlesChange}
-            type="text"
-            value={author}
-            required
-          />
-        </label>
         <label className="AddedComment">
           Add new comment:
           <input

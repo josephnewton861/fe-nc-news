@@ -21,6 +21,8 @@ class SingleArticle extends Component {
   render() {
     const { err } = this.state;
     const { isLoading } = this.state;
+    const { username } = this.props;
+    // console.log(this.props.username);
     // console.log(isLoading);
     if (isLoading) return <LoadingIndicator />;
     if (err) return <ErrorDisplayer err={err} />;
@@ -75,7 +77,7 @@ class SingleArticle extends Component {
         </div>
         {this.state.showComments ? (
           <div>
-            <ArticleComments article_id={article_id} />
+            <ArticleComments username={username} article_id={article_id} />
           </div>
         ) : null}
       </div>
