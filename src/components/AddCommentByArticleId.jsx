@@ -16,26 +16,24 @@ class AddCommentByArticleId extends Component {
     });
   };
 
-  handlesCommentSubmission = (event) => {
-    event.preventDefault();
-    const { username } = this.props;
-    console.log("submitted", this.state);
-    const { body } = this.state;
-    const { article_id } = this.props;
-    api
-      .postComment(article_id, {
+  handlesCommentSubmission = async (event) => {
+    try {
+      event.preventDefault();
+      const { username } = this.props;
+      console.log("submitted", this.state);
+      const { body } = this.state;
+      const { article_id } = this.props;
+      const newComment = await api.postComment(article_id, {
         username: username,
         body: body,
-      })
-      .then((newComment) => {
-        this.props.addComment(newComment);
-        this.setState({
-          body: "",
-        });
-      })
-      .catch((err) => {
-        console.dir(err);
       });
+      this.props.addComment(newComment);
+      this.setState({
+        body: "",
+      });
+    } catch (err) {
+      console.dir(err);
+    }
   };
 
   render() {

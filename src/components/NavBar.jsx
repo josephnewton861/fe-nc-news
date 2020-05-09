@@ -25,10 +25,13 @@ class NavBar extends Component {
       </div>
     );
   }
-  componentDidMount = () => {
-    api.fetchTopics().then((topics) => {
+  componentDidMount = async () => {
+    try {
+      const topics = await api.fetchTopics();
       this.setState({ topics });
-    });
+    } catch (err) {
+      console.log(err);
+    }
   };
 }
 

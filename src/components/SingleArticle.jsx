@@ -80,23 +80,21 @@ class SingleArticle extends Component {
       </div>
     );
   }
-  // if the show
-  //render the article comments
+
   componentDidMount = () => {
     this.fetchSingleArticle();
   };
-  fetchSingleArticle = () => {
-    const { article_id } = this.props;
-    api
-      .getSingleArticle(article_id)
-      .then((article) => {
-        // const formattedArticle = utils.formatDate(data.article);
-        this.setState({ article, isLoading: false });
-      })
-      .catch((err) => {
-        console.dir(err.response.data.msg);
-        this.setState({ isLoading: false, err: err.response.data.msg });
-      });
+  fetchSingleArticle = async () => {
+    try {
+      const { article_id } = this.props;
+
+      const article = await api.getSingleArticle(article_id);
+      // const formattedArticle = utils.formatDate(data.article);
+      this.setState({ article, isLoading: false });
+    } catch (err) {
+      console.dir(err.response.data.msg);
+      this.setState({ isLoading: false, err: err.response.data.msg });
+    }
   };
 
   handlesReadComments = () => {

@@ -69,48 +69,42 @@ class ArticleComments extends Component {
   componentDidMount = () => {
     this.fetchCommentsByArticleId();
   };
-  fetchCommentsByArticleId = () => {
-    const { article_id } = this.props;
-    // console.log(article_id);
-    // console.log(article_id);
-    api
-      .getCommentsByArticleId(article_id)
-      .then((comments) => {
-        // console.log(data.comments);
-        return this.setState({ comments, isLoading: false });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
-  };
-  handlesDelete = (comment_id) => {
-    console.log("Deleted");
-
-    let userPrompt = prompt(
-      "Are you sure you want to delete this comment? Type yes if you do"
-    );
-    if (userPrompt === "yes")
-      api
-        .removeCommentsByCommentId(comment_id)
-        .then(() => {
-          this.setState((previousState) => {
-            //   console.log(previousState);
-            return {
-              comments: previousState.comments.filter((comment) => {
-                //   console.log(comment);
-                //   console.log(comment_id);
-                if (comment.comment_id !== comment_id) return true;
-                else return false;
-              }),
-            };
-          });
-        })
-        .catch((err) => {
-          this.setState({ isLoading: false, err: err.response.data.msg });
-        });
-    else {
-      return alert("Deleted comment aborted!");
+  fetchCommentsByArticleId = async () => {
+    try {
+      const { article_id } = this.props;
+      const comments = await api.getCommentsByArticleId(article_id);
+      return this.setState({ comments, isLoading: false });
+    } catch (err) {
+      console.dir(err);
     }
+  };
+
+  handlesDelete = async (comment_id) => {
+    try {
+      console.log("Deleted");
+
+      let userPrompt = prompt(
+        "Are you sure you want to delete this comment? Type yes if you do"
+      );
+      if (userPrompt === "yes") await api.removeCommentsByCommentId(comment_id);
+
+      this.setState((previousState) => {
+        //   console.log(previousState);
+        return {
+          comments: previousState.comments.filter((comment) => {
+            //   console.log(comment);
+            //   console.log(comment_id);
+            if (comment.comment_id !== comment_id) return true;
+            else return false;
+          }),
+        };
+      });
+    } catch (err) {
+      this.setState({ isLoading: false, err: err.response.data.msg });
+    }
+    // else {
+    //   await alert("Deleted comment aborted!");
+    // }
   };
 
   addComment = (newComment) => {

@@ -32,26 +32,18 @@ class CommentVoter extends Component {
       </div>
     );
   }
-  handlesVotes = (voteChange) => {
+  handlesVotes = async (voteChange) => {
     const { type } = this.props;
     const { id } = this.props;
     console.log("clicked");
-    api.updateVotes(type, id, voteChange);
     this.setState((currentState) => {
       return { voteDifference: currentState.voteDifference + voteChange };
     });
-    // return axios
-    //   .patch(`https://joseph-nc-news.herokuapp.com/api/${type}/${id}`, {
-    //     inc_votes: voteChange,
-    //   })
-    //   .catch(() => {
-    //     this.setState((currentState) => {
-    //       return { voteDifference: currentState.voteDifference - voteChange };
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.dir(err);
-    //   });
+    try {
+      await api.updateVotes(type, id, voteChange);
+    } catch (err) {
+      console.dir(err);
+    }
   };
 }
 

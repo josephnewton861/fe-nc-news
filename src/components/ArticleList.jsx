@@ -44,17 +44,16 @@ class ArticleList extends Component {
     }
   };
 
-  fetchArticles = () => {
-    const { topic_slug } = this.props;
-    const { sort_by } = this.state;
-    api
-      .getArticles(topic_slug, sort_by)
-      .then((articles) => {
-        this.setState({ articles, isLoading: false });
-      })
-      .catch((err) => {
-        this.setState({ err: err.response.err.msg });
-      });
+  fetchArticles = async () => {
+    try {
+      const { topic_slug } = this.props;
+      const { sort_by } = this.state;
+
+      const articles = await api.getArticles(topic_slug, sort_by);
+      this.setState({ articles, sort_by, isLoading: false });
+    } catch (err) {
+      this.setState({ err: err.response.err.msg });
+    }
   };
 }
 
