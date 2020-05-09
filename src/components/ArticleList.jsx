@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import LoadingIndicator from "./LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
-// import * as api from "../utils/api";
-import axios from "axios";
+import * as api from "../utils/api";
+// import axios from "axios";
 import ArticleCard from "../components/ArticleCard";
 
 // import axios from "axios";
@@ -11,7 +11,7 @@ class ArticleList extends Component {
   state = {
     articles: [],
     isLoading: true,
-    sort_by: "votes",
+    sort_by: "created_at",
     err: "",
   };
   render() {
@@ -45,16 +45,12 @@ class ArticleList extends Component {
   };
 
   fetchArticles = () => {
-    // api.getArticles(this.props.topic_slug).then((articles) => {
-    //   this.setState({ articles, isLoading: false });
-    // });
-    axios
-      .get("https://joseph-nc-news.herokuapp.com/api/articles", {
-        params: { topic: this.props.topic_slug, sort_by: this.state.sort_by },
-      })
-      .then((response) => {
-        const { articles } = response.data;
-        this.setState({ articles: articles, isLoading: false });
+    const { topic_slug } = this.props;
+    const { sort_by } = this.state;
+    api
+      .getArticles(topic_slug, sort_by)
+      .then((articles) => {
+        this.setState({ articles, isLoading: false });
       })
       .catch((err) => {
         this.setState({ err: err.response.err.msg });

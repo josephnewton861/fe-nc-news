@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
+import * as api from "../utils/api";
 
 class CommentVoter extends Component {
   state = {
@@ -35,21 +36,22 @@ class CommentVoter extends Component {
     const { type } = this.props;
     const { id } = this.props;
     console.log("clicked");
+    api.updateVotes(type, id, voteChange);
     this.setState((currentState) => {
       return { voteDifference: currentState.voteDifference + voteChange };
     });
-    return axios
-      .patch(`https://joseph-nc-news.herokuapp.com/api/${type}/${id}`, {
-        inc_votes: voteChange,
-      })
-      .catch(() => {
-        this.setState((currentState) => {
-          return { voteDifference: currentState.voteDifference - voteChange };
-        });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+    // return axios
+    //   .patch(`https://joseph-nc-news.herokuapp.com/api/${type}/${id}`, {
+    //     inc_votes: voteChange,
+    //   })
+    //   .catch(() => {
+    //     this.setState((currentState) => {
+    //       return { voteDifference: currentState.voteDifference - voteChange };
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.dir(err);
+    //   });
   };
 }
 

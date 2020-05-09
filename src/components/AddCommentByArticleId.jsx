@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
+import * as api from "../utils/api";
 // import { Link } from "@reach/router";
 
 class AddCommentByArticleId extends Component {
@@ -21,17 +22,13 @@ class AddCommentByArticleId extends Component {
     console.log("submitted", this.state);
     const { body } = this.state;
     const { article_id } = this.props;
-    axios
-      .post(
-        `https://joseph-nc-news.herokuapp.com/api/articles/${article_id}/comments`,
-        {
-          username: username,
-          body: body,
-        }
-      )
-      .then(({ data }) => {
-        console.log(this.props);
-        this.props.addComment(data.comment);
+    api
+      .postComment(article_id, {
+        username: username,
+        body: body,
+      })
+      .then((newComment) => {
+        this.props.addComment(newComment);
         this.setState({
           body: "",
         });

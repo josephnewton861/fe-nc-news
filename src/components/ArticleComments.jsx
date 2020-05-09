@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 import Voter from "./Voter";
 import LoadingIndicator from "./LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
 import AddCommentByArticleId from "./AddCommentByArticleId";
+import * as api from "../utils/api";
 // import { Link } from "@reach/router";
 
 class ArticleComments extends Component {
@@ -41,7 +42,7 @@ class ArticleComments extends Component {
                     <p> Date of publication: {created_at}</p>
                     <p>Article Id: {article_id}</p>
                     <p>Comment Id: {comment_id}</p>
-                    {author === "tickle122" ? (
+                    {author === this.props.username ? (
                       <div>
                         <button
                           className="btn btn-danger"
@@ -72,13 +73,11 @@ class ArticleComments extends Component {
     const { article_id } = this.props;
     // console.log(article_id);
     // console.log(article_id);
-    axios
-      .get(
-        `https://joseph-nc-news.herokuapp.com/api/articles/${article_id}/comments`
-      )
-      .then(({ data }) => {
+    api
+      .getCommentsByArticleId(article_id)
+      .then((comments) => {
         // console.log(data.comments);
-        return this.setState({ comments: data.comments, isLoading: false });
+        return this.setState({ comments, isLoading: false });
       })
       .catch((err) => {
         console.dir(err);
@@ -87,17 +86,13 @@ class ArticleComments extends Component {
   handlesDelete = (comment_id) => {
     console.log("Deleted");
 
-    // let isUser = "tickle122";
-
     let userPrompt = prompt(
       "Are you sure you want to delete this comment? Type yes if you do"
     );
     if (userPrompt === "yes")
-      return axios
-        .delete(
-          `https://joseph-nc-news.herokuapp.com/api/comments/${comment_id}`
-        )
-        .then((res) => {
+      api
+        .removeCommentsByCommentId(comment_id)
+        .then(() => {
           this.setState((previousState) => {
             //   console.log(previousState);
             return {
@@ -119,7 +114,7 @@ class ArticleComments extends Component {
   };
 
   addComment = (newComment) => {
-    // console.log(newComment);
+    console.log(newComment);
     this.setState((currentState) => {
       // console.log(currentState);
       return {

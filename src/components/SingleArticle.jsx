@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
 // import { Link } from "@reach/router";
 // import AddCommentByArticleId from "../components/AddCommentByArticleId";
 import Voter from "../components/Voter";
-// import * as utils from "../utils/utils";
+import * as api from "../utils/api";
 import LoadingIndicator from "../components/LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
 import ArticleComments from "../components/ArticleComments";
@@ -15,8 +14,6 @@ class SingleArticle extends Component {
     err: "",
     showComments: false,
     changeNameOfButton: false,
-    // author: "",
-    // body: "",
   };
   render() {
     const { err } = this.state;
@@ -90,29 +87,17 @@ class SingleArticle extends Component {
   };
   fetchSingleArticle = () => {
     const { article_id } = this.props;
-
-    axios
-      .get(`https://joseph-nc-news.herokuapp.com/api/articles/${article_id}`)
-      .then(({ data }) => {
+    api
+      .getSingleArticle(article_id)
+      .then((article) => {
         // const formattedArticle = utils.formatDate(data.article);
-        this.setState({ article: data.article, isLoading: false });
+        this.setState({ article, isLoading: false });
       })
       .catch((err) => {
         console.dir(err.response.data.msg);
         this.setState({ isLoading: false, err: err.response.data.msg });
       });
   };
-  // addComment = (newComment) => {
-  //   console.log(newComment);
-  //   this.setState((currentState) => {
-  //     return {
-  //       article: [newComment, ...currentState.article],
-  //     };
-  //   });
-  // };
-  // handlesVotes = () => {
-  //   console.log("clicked");
-  // };
 
   handlesReadComments = () => {
     console.log("clicked");
