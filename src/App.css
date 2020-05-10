@@ -1,49 +1,53 @@
-.App {
-  text-align: center;
-  display: grid;
-  grid-template-areas: "header header" "nav main";
-}
-
-.h1 {
+.banner {
   text-align: left;
-  padding-left: 30px;
-  size: 10em;
-}
-
-.header {
-  grid-area: header;
-  background-color: rgba(13, 110, 139, 0.6);
-  color: white;
-  height: 10vh;
-  position: relative;
-  padding-left: 20px;
+  margin-left: 50px;
+  margin-top: 25px;
+  font-family: "Courier New";
 }
 
 .login {
-  size: 1em;
   text-align: right;
-  padding-right: 20px;
-  padding-bottom: 30px;
+  margin-right: 20px;
+  font-weight: bold;
 }
 
-.nav {
-  grid-area: nav;
-  display: flex;
-  margin-left: 20px;
-
-  position: relative;
-  top: 0;
-  left: 0;
-  flex-direction: column;
-  color: aqua;
+#nav {
+  width: 100%;
+  float: left;
+  margin: 0 0 1em 0;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+}
+#nav ul {
+  list-style: none;
+  padding: 0;
+  display: inline;
+}
+#nav li {
+  float: left;
+}
+#nav li a {
+  display: block;
+  padding: 8px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  border-right: 1px solid #ccc;
+  text-align: right;
+}
+#nav li:first-child a {
+  border-left: 1px solid #ccc;
+}
+#nav li a:hover {
+  color: #c00;
+  background-color: #fff;
 }
 
-@media only screen and (max-width: 1100px) {
-  .nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
+.image {
+  align-items: center;
+  margin-top: 50px;
+  filter: grayscale(100%);
+  margin-bottom: 50px;
 }
 
 .container {
@@ -55,20 +59,25 @@
 
 .articlesTitle {
   text-align: center;
+  font-family: "Courier New";
+  font-weight: 800;
 }
-
-.articlesList {
-  grid-area: mainContent;
+.articleList {
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
 }
-
 .articlesTitle {
   margin-top: 90px;
+}
+
+.readMore {
+  color: #ccc;
+  font-weight: bold;
+}
+
+.articleHeader {
+  font-family: "Courier New";
+  font-weight: 800;
+  text-align: center;
 }
 
 .singleArticle {
@@ -77,6 +86,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: Stencil Std;
+  font-size: 1.3em;
 }
 
 .commentViewer {
@@ -98,10 +109,6 @@ button:disabled {
   opacity: 0.5;
 }
 
-.commentViewer:hover {
-  opacity: 0.7;
-}
-
 .article {
   text-align: center;
 }
@@ -111,24 +118,33 @@ button:disabled {
   height: 1px;
 }
 
-.readComments {
-  margin-bottom: 15px;
-  background-color: none;
-  transition: opacity 0.5s ease-in;
-}
-
-.readComments:hover {
-  opacity: 0.7;
-}
-
-.articlesList {
-  margin-top: 50px;
-  padding: auto;
-}
 .submit {
   margin-left: 15px;
+  font-family: Stencil Std;
+  font-size: 1.3em;
 }
 
-.articlesContainer {
-  max-width: 950px;
+.AddedComment {
+  margin-bottom: 20px;
+  align-items: center;
+  font-family: Stencil Std;
+  font-size: 1.3em;
+}
+
+.input {
+  border: 2px solid gray;
+  margin-left: 10px;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+.articleCard {
+  border: 2px solid gray;
+}
+
+.comments {
+  font-family: Stencil Std;
+  font-size: 1.3em;
 }

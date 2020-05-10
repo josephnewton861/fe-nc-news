@@ -21,15 +21,27 @@ class ArticleList extends Component {
     if (isLoading) return <LoadingIndicator />;
     if (err) return <ErrorDisplayer err={err} />;
     return (
-      <main className="articlesContainer">
-        <h2 className="articlesTitle">
-          Here are all the articles on our site click to view article in more
-          depth:
-        </h2>
-        {articles.map((article) => {
-          return <ArticleCard {...article} key={article.article_id} />;
-        })}
-      </main>
+      <div>
+        <section className="image">
+          <img
+            src="https://www.seoclerk.com/pics/528066-1yhKU01492828815.jpg"
+            alt="img"
+            height="500"
+            width="100%"
+          />
+        </section>
+        <main className="articlesContainer">
+          <h3 className="articlesTitle">
+            <u>
+              Here are all the articles on our site. Click to an view article in
+              more depth:
+            </u>
+          </h3>
+          {articles.map((article) => {
+            return <ArticleCard {...article} key={article.article_id} />;
+          })}
+        </main>
+      </div>
     );
   }
   componentDidMount = () => {

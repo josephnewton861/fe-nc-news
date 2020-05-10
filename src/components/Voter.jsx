@@ -8,10 +8,6 @@ class CommentVoter extends Component {
   };
   render() {
     const { voteDifference } = this.state;
-    // console.log(this.props.type);
-    // const { id, votes } = this.props;
-    // console.log(id);
-    // console.log(votes);
     return (
       <div>
         <button
@@ -35,7 +31,6 @@ class CommentVoter extends Component {
   handlesVotes = async (voteChange) => {
     const { type } = this.props;
     const { id } = this.props;
-    console.log("clicked");
     this.setState((currentState) => {
       return { voteDifference: currentState.voteDifference + voteChange };
     });

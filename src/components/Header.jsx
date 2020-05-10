@@ -2,9 +2,14 @@ import React from "react";
 
 const Header = ({ username }) => {
   return (
-    <header className="header">
-      <h1>NC_News</h1> <h2 className="login">Logged in as: {username}</h2>
-    </header>
+    <div className="banner">
+      <h1>
+        <strong>
+          <em>NC News</em>
+        </strong>
+      </h1>
+      <h4 className="login">Logged in as: {username}</h4>
+    </div>
   );
 };
 

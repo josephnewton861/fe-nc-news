@@ -18,7 +18,6 @@ class ArticleComments extends Component {
     const { comments } = this.state;
     const { isLoading } = this.state;
     const { username } = this.props;
-    // console.log(comments);
     if (isLoading) return <LoadingIndicator />;
     if (err) return <ErrorDisplayer err={err} />;
     return (
@@ -29,14 +28,16 @@ class ArticleComments extends Component {
           addComment={this.addComment}
         />
         <div className="card">
-          <section></section>
-          <section>
+          <section className="comments">
             {comments.map(
               ({ comment_id, article_id, author, votes, created_at, body }) => {
-                // console.log(author);
                 return (
                   <section className="article" key={comment_id}>
-                    <h3>Author: {author}</h3>
+                    <h3>
+                      <u>
+                        <strong>Author: {author}</strong>
+                      </u>
+                    </h3>
                     <h4>Body: {body}</h4>
                     <Voter id={comment_id} votes={votes} type="comments" />
                     <p> Date of publication: {created_at}</p>
@@ -76,24 +77,20 @@ class ArticleComments extends Component {
       return this.setState({ comments, isLoading: false });
     } catch (err) {
       console.dir(err);
+      this.setState({ err: err.response.err.msg });
     }
   };
 
   handlesDelete = async (comment_id) => {
     try {
-      console.log("Deleted");
-
       let userPrompt = prompt(
         "Are you sure you want to delete this comment? Type yes if you do"
       );
       if (userPrompt === "yes") await api.removeCommentsByCommentId(comment_id);
 
       this.setState((previousState) => {
-        //   console.log(previousState);
         return {
           comments: previousState.comments.filter((comment) => {
-            //   console.log(comment);
-            //   console.log(comment_id);
             if (comment.comment_id !== comment_id) return true;
             else return false;
           }),
@@ -102,15 +99,10 @@ class ArticleComments extends Component {
     } catch (err) {
       this.setState({ isLoading: false, err: err.response.data.msg });
     }
-    // else {
-    //   await alert("Deleted comment aborted!");
-    // }
   };
 
   addComment = (newComment) => {
-    console.log(newComment);
     this.setState((currentState) => {
-      // console.log(currentState);
       return {
         comments: [newComment, ...currentState.comments],
       };

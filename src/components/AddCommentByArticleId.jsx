@@ -8,8 +8,6 @@ class AddCommentByArticleId extends Component {
     body: "",
   };
   handlesChange = (event) => {
-    // console.log(event.target.value);
-
     const { value, name } = event.target;
     this.setState({
       [name]: value,
@@ -20,7 +18,6 @@ class AddCommentByArticleId extends Component {
     try {
       event.preventDefault();
       const { username } = this.props;
-      console.log("submitted", this.state);
       const { body } = this.state;
       const { article_id } = this.props;
       const newComment = await api.postComment(article_id, {
@@ -41,8 +38,9 @@ class AddCommentByArticleId extends Component {
     return (
       <form onSubmit={this.handlesCommentSubmission}>
         <label className="AddedComment">
-          Add new comment:
+          Add a new comment:
           <input
+            className="input"
             name="body"
             onChange={this.handlesChange}
             type="text"
