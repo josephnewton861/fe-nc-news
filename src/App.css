@@ -64,6 +64,8 @@
 }
 .articleList {
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 .articlesTitle {
   margin-top: 90px;
@@ -147,4 +149,9 @@ button:disabled {
 .comments {
   font-family: Stencil Std;
   font-size: 1.3em;
+}
+
+.articleCards {
+  flex: 1 0 21%;
+  margin: 20px;
 }

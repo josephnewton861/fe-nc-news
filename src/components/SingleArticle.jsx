@@ -45,42 +45,38 @@ class SingleArticle extends Component {
         <div className="container">
           <h3 className="articleHeader">Your chosen article:</h3>
           <div className="jumbotron">
-            <div className="col-lg-12 col-lg-8">
-              <div className="card-block">
-                <section className="singleArticle">
-                  <h3 className="card-title">
-                    <strong>
-                      <u>Article title: {title}</u>
-                    </strong>
-                  </h3>
-                  <h4>Author: {author}</h4>
-                  <h4>Choosen topic: {topic}</h4>
-                  <p> Body: {body}</p>
-                  <Voter votes={votes} id={article_id} type="articles" />
-                  <p>Current comments: {comment_count}</p>
-                  <p> Date of publication: {created_at}</p>
-                  <p>Article Id: {article_id}</p>
-                  {this.state.changeNameOfButton === false ? (
-                    <div>
-                      <button
-                        onClick={this.handlesReadComments}
-                        className="readComments btn btn-dark"
-                      >
-                        Read article comments
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={this.handlesReadComments}
-                      className="readComments btn btn-dark"
-                    >
-                      Hide article comments
-                    </button>
-                  )}
-                  <section></section>
-                </section>
-              </div>
-            </div>
+            <section className="singleArticle">
+              <h3 className="card-title">
+                <strong>
+                  <u>Article title: {title}</u>
+                </strong>
+              </h3>
+              <h4>Author: {author}</h4>
+              <h4>Choosen topic: {topic}</h4>
+              <p> Body: {body}</p>
+              <Voter votes={votes} id={article_id} type="articles" />
+              <p>Current comments: {comment_count}</p>
+              <p> Date of publication: {created_at}</p>
+              <p>Article Id: {article_id}</p>
+              {this.state.changeNameOfButton === false ? (
+                <div>
+                  <button
+                    onClick={this.handlesReadComments}
+                    className="readComments btn btn-dark"
+                  >
+                    Read article comments
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={this.handlesReadComments}
+                  className="readComments btn btn-dark"
+                >
+                  Hide article comments
+                </button>
+              )}
+              <section></section>
+            </section>
           </div>
         </div>
         {this.state.showComments ? (

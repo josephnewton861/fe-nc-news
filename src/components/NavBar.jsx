@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import * as api from "../utils/api";
+import { IoIosHome } from "react-icons/io";
 
 class NavBar extends Component {
   state = {
@@ -14,7 +15,9 @@ class NavBar extends Component {
         <nav id="nav">
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">
+                <IoIosHome size="1.6rem" /> Home
+              </Link>
             </li>
           </ul>
           {topics.map((topic) => {

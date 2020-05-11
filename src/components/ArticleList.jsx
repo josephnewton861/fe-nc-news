@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import LoadingIndicator from "./LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
 import * as api from "../utils/api";
-// import axios from "axios";
 import ArticleCard from "../components/ArticleCard";
+// import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
+// import Container from "react-bootstrap/Container";
+// import CardDeck from "react-bootstrap/CardDeck";
 
 // import axios from "axios";
 
@@ -37,9 +40,11 @@ class ArticleList extends Component {
               more depth:
             </u>
           </h3>
-          {articles.map((article) => {
-            return <ArticleCard {...article} key={article.article_id} />;
-          })}
+          <div className="articleList">
+            {articles.map((article) => {
+              return <ArticleCard {...article} key={article.article_id} />;
+            })}
+          </div>
         </main>
       </div>
     );
