@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import { Link } from "@reach/router";
-// import AddCommentByArticleId from "../components/AddCommentByArticleId";
 import Voter from "../components/Voter";
 import * as api from "../utils/api";
 import LoadingIndicator from "../components/LoadingIndicator";

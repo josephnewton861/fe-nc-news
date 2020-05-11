@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-// import axios from "axios";
 import Voter from "./Voter";
 import LoadingIndicator from "./LoadingIndicator";
 import ErrorDisplayer from "../components/ErrorDisplayer";
 import AddCommentByArticleId from "./AddCommentByArticleId";
 import * as api from "../utils/api";
-// import { Link } from "@reach/router";
 
 class ArticleComments extends Component {
   state = {
