@@ -1,6 +1,6 @@
-
-
 # NC News FE React-App 
+
+## Important: This project is no longer supported
 
 #### This project highlights everything learned during the frontend section of the Northcoders bootcamp. It includes using my backend server, react, css and bootstrap to create a responsive web application using routers and links. The App gives frontend access containing articles, comments, topics and the logged in user.
 
